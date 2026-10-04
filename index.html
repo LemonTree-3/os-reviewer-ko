@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operating Systems Mastery Test (60 Items)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-gray-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight">Mag Review Ka sa OS, Kupal!</h1>
+                <p class="text-gray-200 text-xs sm:text-sm">Galing PDF Lahat 'Yan Ah! • 60 Comprehensive Items</p>
+            </div>
+            <div class="bg-gray-800 px-4 py-2 rounded-lg text-right border border-gray-600">
+                <span class="text-xs uppercase tracking-wider text-gray-300 block">Score</span>
+                <span id="score-display" class="text-xl font-extrabold text-white">0 / 60</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto p-4 sm:p-6 space-y-8">
+
+        <!-- Instructions Banner -->
+        <div class="bg-white border-l-4 border-indigo-600 p-4 rounded-r-lg shadow-sm flex items-start space-x-3">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div>
+                <h2 class="text-sm font-semibold text-slate-900">Instructions</h2>
+                <p class="text-xs sm:text-sm text-slate-600 mt-0.5">
+                    Sagutan, Tapusin, Magdasal, Manalangin, at Umasa ka, Tanga!
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 1: Multiple Choice -->
+        <section class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+            <div class="bg-indigo-50 border-b border-indigo-100 px-6 py-4 flex items-center justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-indigo-900">Part I: Multiple Choice</h2>
+                    <p class="text-xs text-indigo-700">Questions 1 to 20 • Select the single best answer for each question.</p>
+                </div>
+                <span class="bg-indigo-200 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-semibold">20 Items</span>
+            </div>
+            <div class="p-6 divide-y divide-slate-100" id="mc-container">
+                <!-- MC Questions Dynamic Insertion -->
+            </div>
+        </section>
+
+        <!-- Section 2: Identification -->
+        <section class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+            <div class="bg-indigo-50 border-b border-indigo-100 px-6 py-4 flex items-center justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-indigo-900">Part II: Identification</h2>
+                    <p class="text-xs text-indigo-700">Questions 21 to 40 • Choose the correct term from the selection dropdown.</p>
+                </div>
+                <span class="bg-indigo-200 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-semibold">20 Items</span>
+            </div>
+            <div class="p-6 divide-y divide-slate-100" id="id-container">
+                <!-- Identification Questions Dynamic Insertion -->
+            </div>
+        </section>
+
+        <!-- Section 3: Matching Type -->
+        <section class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+            <div class="bg-indigo-50 border-b border-indigo-100 px-6 py-4 flex items-center justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-indigo-900">Part III: Matching Letters</h2>
+                    <p class="text-xs text-indigo-700">Questions 41 to 60 • Match Column A descriptions with Column B terms.</p>
+                </div>
+                <span class="bg-indigo-200 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-semibold">20 Items</span>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Column B Key reference -->
+                <div class="md:col-span-1 bg-slate-50 p-4 rounded-lg border border-slate-200 h-fit sticky top-20">
+                    <h3 class="font-bold text-sm text-slate-800 mb-3 border-b pb-2">Column B Choices</h3>
+                    <ul class="text-xs space-y-1.5 text-slate-700 font-mono" id="matching-key-list">
+                        <!-- Key items listed -->
+                    </ul>
+                </div>
+                <!-- Column A Items -->
+                <div class="md:col-span-2 space-y-4" id="matching-container">
+                    <!-- Matching questions insertion -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Controls -->
+        <div class="flex justify-between items-center py-6">
+            <button onclick="resetTest()" class="px-5 py-2.5 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-100 transition duration-150">
+                Reset All Answers
+            </button>
+            <button onclick="scrollToTop()" class="px-5 py-2.5 rounded-lg bg-indigo-600 text-white font-medium hover:bg-gray-900 shadow transition duration-150">
+                Back to Top
+            </button>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 text-xs py-6 border-t border-slate-700 mt-auto">
+        <div class="max-w-5xl mx-auto px-4 text-center space-y-2">
+            <p>Interactive Operating Systems Assessment Module • Based on OS QUIZ REV Document</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data Structure for Test Items
+        const mcQuestions = [
+            {
+                id: 1,
+                question: "Which component of a process is responsible for storing global variables?",
+                options: ["Program Code (Text)", "Data Section", "Heap", "Stack"],
+                correct: 1,
+                explanation: "The Data Section stores global and static variables."
+            },
+            {
+                id: 2,
+                question: "In which process state is the program located in main memory after being loaded from the New State?",
+                options: ["Run State", "Block or Wait State", "Ready State", "Suspend Ready State"],
+                correct: 2,
+                explanation: "Processes in the Ready State reside in main memory waiting to be assigned to the CPU."
+            },
+            {
+                id: 3,
+                question: "What thread model maps each user-level thread directly to a single kernel thread?",
+                options: ["Many-to-One", "One-to-One", "Many-to-Many", "One-to-Many"],
+                correct: 1,
+                explanation: "The One-to-One multithreading model maps each user thread to an individual kernel thread."
+            },
+            {
+                id: 4,
+                question: "Which requirement for Critical Section ensures that no process should wait indefinitely to enter its critical section (prevents starvation)?",
+                options: ["Mutual Exclusion", "Progress", "Bounded Waiting", "Context Switching"],
+                correct: 2,
+                explanation: "Bounded Waiting places a limit on the number of times other processes can enter critical sections, preventing starvation."
+            },
+            {
+                id: 5,
+                question: "What condition occurs when multiple processes access and modify shared data concurrently, causing the final output to depend on execution order?",
+                options: ["Race Condition", "Deadlock", "Context Switching", "Starvation"],
+                correct: 0,
+                explanation: "A Race Condition happens when concurrent execution leads to output dependence on execution timing."
+            },
+            {
+                id: 6,
+                question: "Which synchronization mechanism uses a simple locking mechanism with boolean-like states?",
+                options: ["Counting Semaphore", "Mutex", "Monitor", "Message Passing"],
+                correct: 1,
+                explanation: "A Mutex (Mutual Exclusion object) is a locking mechanism used to restrict access to a resource."
+            },
+            {
+                id: 7,
+                question: "In the Classical Readers-Writers Problem, which of the following is TRUE?",
+                options: ["Multiple writers can write simultaneously", "Readers require exclusive access", "Multiple readers can read concurrently", "Writers have lower priority than all wait states"],
+                correct: 2,
+                explanation: "Multiple readers can read shared data concurrently, but writers require exclusive access."
+            },
+            {
+                id: 8,
+                question: "Which IPC method requires processes to communicate through explicit send and receive mechanisms?",
+                options: ["Shared Memory", "Message Passing", "Monitors", "Semaphores"],
+                correct: 1,
+                explanation: "Message Passing enables process communication by sending and receiving explicit messages."
+            },
+            {
+                id: 9,
+                question: "Which CPU scheduling algorithm executes processes strictly in the order they arrive in the ready queue?",
+                options: ["Shortest Job First (SJF)", "Priority Scheduling", "Round Robin (RR)", "First Come, First Served (FCFS)"],
+                correct: 3,
+                explanation: "FCFS executes processes sequentially based on arrival order."
+            },
+            {
+                id: 10,
+                question: "What CPU scheduling technique assigns each process a fixed unit of time known as a time quantum?",
+                options: ["Round Robin (RR)", "Shortest Job First (SJF)", "Multilevel Queue", "FCFS"],
+                correct: 0,
+                explanation: "Round Robin CPU scheduling allocates a fixed time quantum per process in a cyclic order."
+            },
+            {
+                id: 11,
+                question: "Which Coffman Condition for deadlock states that resources cannot be forcibly taken from a process holding them?",
+                options: ["Mutual Exclusion", "Hold and Wait", "No Preemption", "Circular Wait"],
+                correct: 2,
+                explanation: "No Preemption specifies that a resource can only be released voluntarily by the process holding it."
+            },
+            {
+                id: 12,
+                question: "Which Deadlock Handling Method designs the system so that at least one of the four necessary Coffman conditions can never hold?",
+                options: ["Deadlock Avoidance", "Deadlock Prevention", "Deadlock Detection", "Deadlock Ignorance"],
+                correct: 1,
+                explanation: "Deadlock Prevention eliminates deadlock possibilities by invalidating at least one Coffman condition."
+            },
+            {
+                id: 13,
+                question: "Where is local variable storage and function call tracking maintained inside a process memory structure?",
+                options: ["Heap", "Data Section", "Text / Program Code", "Stack"],
+                correct: 3,
+                explanation: "The Stack section stores local variables, function parameters, and return addresses."
+            },
+            {
+                id: 14,
+                question: "What happens during Context Switching?",
+                options: ["A process creates a child process", "The CPU stops executing one process and switches state to another", "Memory is moved from heap to stack", "Deadlocks are automatically resolved"],
+                correct: 1,
+                explanation: "Context switching stores state of the active process and loads state of a new process onto CPU."
+            },
+            {
+                id: 15,
+                question: "A process moves to the 'Suspend Wait State' when:",
+                options: ["It completes execution", "CPU time quantum expires", "Main memory is full and a higher priority process needs memory while it waits for I/O", "It is placed in secondary memory upon initial creation"],
+                correct: 2,
+                explanation: "Suspend Wait occurs when main memory is full while a waiting process is moved to secondary storage."
+            },
+            {
+                id: 16,
+                question: "Which CPU scheduling algorithm allows process movement between different queues based on historical execution behavior?",
+                options: ["Multilevel Queue Scheduling", "Multilevel Feedback Queue (MLFQ)", "First Come First Served", "Priority Scheduling"],
+                correct: 1,
+                explanation: "MLFQ allows processes to dynamically transition between queues based on execution traits."
+            },
+            {
+                id: 17,
+                question: "Which classical problem models five individuals alternating between thinking, eating, and sharing finite resources?",
+                options: ["Producer-Consumer", "Readers-Writers", "Dining Philosophers", "Sleeping Barber"],
+                correct: 2,
+                explanation: "The Dining Philosophers problem illustrates synchronization issues when allocation of discrete resources is needed."
+            },
+            {
+                id: 18,
+                question: "What type of semaphore contains values constrained strictly to 0 or 1?",
+                options: ["Counting Semaphore", "Binary Semaphore", "Mutex Semaphore", "Monitor Semaphore"],
+                correct: 1,
+                explanation: "Binary Semaphores restricted value range is strictly binary (0 or 1)."
+            },
+            {
+                id: 19,
+                question: "Which deadlock recovery approach forcibly takes resources from one process to give to another?",
+                options: ["Process Termination", "Resource Preemption", "Safe State Evaluation", "Deadlock Avoidance"],
+                correct: 1,
+                explanation: "Resource Preemption reallocates resources forcibly from active processes to resolve deadlocks."
+            },
+            {
+                id: 20,
+                question: "Under non-preemptive CPU scheduling, when does a process release the CPU?",
+                options: ["When a higher priority process enters ready queue", "Only when it completes execution or blocks for I/O", "When its time quantum expires", "When requested by user threads"],
+                correct: 1,
+                explanation: "Non-preemptive scheduling guarantees CPU retention until voluntary yield or process completion."
+            }
+        ];
+
+        const idQuestions = [
+            {
+                id: 21,
+                question: "The smallest unit of CPU execution managed independently by the OS or thread libraries.",
+                answer: "Thread",
+                options: ["Process", "Thread", "Stack", "Semaphore", "Mutex"]
+            },
+            {
+                id: 22,
+                question: "Memory segment of a process that stores dynamically allocated memory at runtime.",
+                answer: "Heap",
+                options: ["Stack", "Heap", "Data Section", "Program Code", "Queue"]
+            },
+            {
+                id: 23,
+                question: "High-level synchronization construct that combines shared data variables with synchronization procedures.",
+                answer: "Monitor",
+                options: ["Mutex", "Semaphore", "Monitor", "Critical Section", "IPC"]
+            },
+            {
+                id: 24,
+                question: "Process state assigned when a program is currently executing on the CPU.",
+                answer: "Run State",
+                options: ["Ready State", "New State", "Run State", "Block or Wait State", "Terminate State"]
+            },
+            {
+                id: 25,
+                question: "Condition where two or more processes wait indefinitely for resources held by each other.",
+                answer: "Deadlock",
+                options: ["Starvation", "Deadlock", "Race Condition", "Context Switch", "Preemption"]
+            },
+            {
+                id: 26,
+                question: "IPC mechanism where processes communicate directly by writing and reading a shared region of memory.",
+                answer: "Shared Memory",
+                options: ["Message Passing", "Shared Memory", "Monitor", "Semaphore", "Queue"]
+            },
+            {
+                id: 27,
+                question: "Part of a program where shared resources (e.g., variables, files) are accessed and updated.",
+                answer: "Critical Section",
+                options: ["Data Section", "Critical Section", "Heap", "Text Section", "Main Memory"]
+            },
+            {
+                id: 28,
+                question: "CPU scheduling algorithm where CPU allocation depends on the process having the smallest CPU burst time.",
+                answer: "Shortest Job First (SJF)",
+                options: ["First Come First Served", "Shortest Job First (SJF)", "Priority Scheduling", "Round Robin", "MLFQ"]
+            },
+            {
+                id: 29,
+                question: "Deadlock handling method that pretends deadlocks never occur (Ostrich algorithm).",
+                answer: "Deadlock Ignorance",
+                options: ["Deadlock Prevention", "Deadlock Avoidance", "Deadlock Detection", "Deadlock Recovery", "Deadlock Ignorance"]
+            },
+            {
+                id: 30,
+                question: "Semaphore variant whose integer value can range over an unrestricted domain for multiple resources.",
+                answer: "Counting Semaphore",
+                options: ["Binary Semaphore", "Counting Semaphore", "Mutex", "Monitor", "Queue"]
+            },
+            {
+                id: 31,
+                question: "Threads that are managed directly by thread libraries without kernel awareness.",
+                answer: "User-Level Threads",
+                options: ["Kernel-Level Threads", "User-Level Threads", "Hardware Threads", "System Threads"]
+            },
+            {
+                id: 32,
+                question: "Requirement ensuring only one process can execute inside its critical section at any given time.",
+                answer: "Mutual Exclusion",
+                options: ["Progress", "Bounded Waiting", "Mutual Exclusion", "Context Switch"]
+            },
+            {
+                id: 33,
+                question: "Classical problem where a producer inserts items into a shared buffer and consumer removes them.",
+                answer: "Producer-Consumer Problem",
+                options: ["Producer-Consumer Problem", "Readers-Writers Problem", "Dining Philosophers Problem", "Deadlock Problem"]
+            },
+            {
+                id: 34,
+                question: "Coffman condition where processes hold already allocated resources while requesting additional ones.",
+                answer: "Hold and Wait",
+                options: ["Mutual Exclusion", "Hold and Wait", "No Preemption", "Circular Wait"]
+            },
+            {
+                id: 35,
+                question: "Process management feature responsible for switching CPU attention between different active threads or processes.",
+                answer: "Context Switching",
+                options: ["Context Switching", "Preemption", "Multithreading", "Scheduling"]
+            },
+            {
+                id: 36,
+                question: "Deadlock recovery action involving aborting one or more processes to break deadlock cycles.",
+                answer: "Process Termination",
+                options: ["Process Termination", "Resource Preemption", "Context Switching", "Preemption"]
+            },
+            {
+                id: 37,
+                question: "Process state when waiting for an I/O completion or blocked resource.",
+                answer: "Block or Wait State",
+                options: ["New State", "Ready State", "Block or Wait State", "Suspend Ready State"]
+            },
+            {
+                id: 38,
+                question: "Scheduling category where the CPU can be forcibly taken from a process before execution finishes.",
+                answer: "Preemptive Scheduling",
+                options: ["Preemptive Scheduling", "Non-Preemptive Scheduling", "Cooperative Scheduling", "Batch Scheduling"]
+            },
+            {
+                id: 39,
+                question: "Deadlock handling method where the system dynamically checks each request to ensure it remains in a safe state.",
+                answer: "Deadlock Avoidance",
+                options: ["Deadlock Prevention", "Deadlock Avoidance", "Deadlock Detection", "Deadlock Ignorance"]
+            },
+            {
+                id: 40,
+                question: "Coffman condition describing a closed loop chain of processes, each waiting for a resource held by the next.",
+                answer: "Circular Wait",
+                options: ["Hold and Wait", "Circular Wait", "Mutual Exclusion", "No Preemption"]
+            }
+        ];
+
+        const matchingChoices = [
+            { letter: "A", text: "Program Code (Text)" },
+            { letter: "B", text: "Stack" },
+            { letter: "C", text: "New State" },
+            { letter: "D", text: "Terminate State" },
+            { letter: "E", text: "Suspend Ready State" },
+            { letter: "F", text: "Kernel-Level Threads" },
+            { letter: "G", text: "Many-to-One Model" },
+            { letter: "H", text: "Progress" },
+            { letter: "I", text: "Mutex" },
+            { letter: "J", text: "Counting Semaphore" },
+            { letter: "K", text: "Readers-Writers Problem" },
+            { letter: "L", text: "Synchronization" },
+            { letter: "M", text: "Shared Memory" },
+            { letter: "N", text: "Message Passing" },
+            { letter: "O", text: "FCFS Scheduling" },
+            { letter: "P", text: "Priority Scheduling" },
+            { letter: "Q", text: "Multilevel Queue" },
+            { letter: "R", text: "Mutual Exclusion (Coffman)" },
+            { letter: "S", text: "Deadlock Detection" },
+            { letter: "T", text: "Resource Preemption" }
+        ];
+
+        const matchingQuestions = [
+            { id: 41, desc: "Executable instructions section of a process.", answer: "A" },
+            { id: 42, desc: "Memory area storing local variables and function returns.", answer: "B" },
+            { id: 43, desc: "State where program is in secondary memory waiting to enter main memory.", answer: "C" },
+            { id: 44, desc: "State after process execution finishes.", answer: "D" },
+            { id: 45, desc: "Process in secondary memory moved from ready state due to memory limits.", answer: "E" },
+            { id: 46, desc: "Threads managed directly by the Operating System.", answer: "F" },
+            { id: 47, desc: "Multithreading model where multiple user threads map to a single kernel thread.", answer: "G" },
+            { id: 48, desc: "CS requirement ensuring waiting processes eventually get selected.", answer: "H" },
+            { id: 49, desc: "Locking mechanism for critical section access control.", answer: "I" },
+            { id: 50, desc: "Semaphore allowing multiple process access based on counter value.", answer: "J" },
+            { id: 51, desc: "Classical problem where writers need exclusive access.", answer: "K" },
+            { id: 52, desc: "Mechanism controlling the execution order of cooperating processes.", answer: "L" },
+            { id: 53, desc: "IPC method where processes exchange data via common address space.", answer: "M" },
+            { id: 54, desc: "IPC technique using explicit message transfer without shared memory.", answer: "N" },
+            { id: 55, desc: "Non-preemptive algorithm serving processes strictly by arrival time.", answer: "O" },
+            { id: 56, desc: "CPU scheduling assigning processor to highest priority rank.", answer: "P" },
+            { id: 57, desc: "Scheduling technique grouping processes into fixed queues by characteristics.", answer: "Q" },
+            { id: 58, desc: "Coffman condition stating only one process uses a resource at once.", answer: "R" },
+            { id: 59, desc: "Method that allows deadlocks to occur but identifies and tracks them.", answer: "S" },
+            { id: 60, desc: "Recovery method taking resources forcibly from processes.", answer: "T" }
+        ];
+
+        // Global State tracking correct items
+        const userAnswers = {};
+        const scoreTracker = new Set();
+
+        // Render Functions
+        function renderMC() {
+            const container = document.getElementById('mc-container');
+            container.innerHTML = mcQuestions.map(q => `
+                <div class="py-5 first:pt-0 last:pb-0" id="item-${q.id}">
+                    <p class="font-semibold text-slate-800 text-sm sm:text-base mb-3">
+                        <span class="text-indigo-600 font-bold mr-1">${q.id}.</span> ${q.question}
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                        ${q.options.map((opt, idx) => `
+                            <button onclick="checkMC(${q.id},${idx})" 
+                                id="mc-btn-${q.id}-${idx}"
+                                class="text-left px-4 py-2.5 rounded-lg border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-xs sm:text-sm font-medium transition duration-150 text-slate-700">
+                                <span class="font-mono text-xs text-slate-400 mr-2">${String.fromCharCode(65 + idx)}.</span>${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="feedback-${q.id}" class="hidden text-xs sm:text-sm p-3 rounded-lg mt-2"></div>
+                </div>
+            `).join('');
+        }
+
+        function renderID() {
+            const container = document.getElementById('id-container');
+            container.innerHTML = idQuestions.map(q => `
+                <div class="py-5 first:pt-0 last:pb-0" id="item-${q.id}">
+                    <p class="font-semibold text-slate-800 text-sm sm:text-base mb-3">
+                        <span class="text-indigo-600 font-bold mr-1">${q.id}.</span> ${q.question}
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-2">
+                        <select id="id-select-${q.id}" onchange="checkID(${q.id})" class="w-full sm:w-auto px-3 py-2 border border-slate-300 rounded-lg text-xs sm:text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="">-- Select Answer --</option>
+                            ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div id="feedback-${q.id}" class="hidden text-xs sm:text-sm p-3 rounded-lg mt-2"></div>
+                </div>
+            `).join('');
+        }
+
+        function renderMatching() {
+            // Render Column B Choices
+            const keyList = document.getElementById('matching-key-list');
+            keyList.innerHTML = matchingChoices.map(c => `
+                <li class="flex items-start">
+                    <span class="font-bold text-indigo-600 w-5 flex-shrink-0">[${c.letter}]</span>
+                    <span>${c.text}</span>
+                </li>
+            `).join('');
+
+            // Render Column A Questions
+            const container = document.getElementById('matching-container');
+            container.innerHTML = matchingQuestions.map(q => `
+                <div class="p-4 rounded-lg border border-slate-200 bg-white shadow-sm space-y-2" id="item-${q.id}">
+                    <div class="flex items-start justify-between gap-2">
+                        <p class="text-xs sm:text-sm font-medium text-slate-800">
+                            <span class="text-indigo-600 font-bold">${q.id}.</span> ${q.desc}
+                        </p>
+                        <select id="match-select-${q.id}" onchange="checkMatching(${q.id})" class="px-2.5 py-1.5 border border-slate-300 rounded text-xs font-bold text-indigo-700 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="">-</option>
+                            ${matchingChoices.map(c => `<option value="${c.letter}">${c.letter}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div id="feedback-${q.id}" class="hidden text-xs p-2.5 rounded"></div>
+                </div>
+            `).join('');
+        }
+
+        // Logic & Checking Functions
+        function checkMC(qId, selectedIdx) {
+            const q = mcQuestions.find(item => item.id === qId);
+            const feedbackEl = document.getElementById(`feedback-${qId}`);
+            
+            // Highlight Buttons
+            q.options.forEach((_, idx) => {
+                const btn = document.getElementById(`mc-btn-${qId}-${idx}`);
+                btn.disabled = true;
+                if (idx === q.correct) {
+                    btn.className = "text-left px-4 py-2.5 rounded-lg border-2 border-emerald-500 bg-emerald-50 text-emerald-900 text-xs sm:text-sm font-medium";
+                } else if (idx === selectedIdx) {
+                    btn.className = "text-left px-4 py-2.5 rounded-lg border-2 border-rose-500 bg-rose-50 text-rose-900 text-xs sm:text-sm font-medium";
+                } else {
+                    btn.className = "text-left px-4 py-2.5 rounded-lg border border-slate-200 opacity-50 text-xs sm:text-sm font-medium text-slate-500";
+                }
+            });
+
+            feedbackEl.classList.remove('hidden');
+            if (selectedIdx === q.correct) {
+                feedbackEl.className = "text-xs sm:text-sm p-3 rounded-lg mt-2 bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedbackEl.innerHTML = `<strong>Correct!</strong> ${q.explanation}`;
+                scoreTracker.add(qId);
+            } else {
+                feedbackEl.className = "text-xs sm:text-sm p-3 rounded-lg mt-2 bg-rose-100 text-rose-800 border border-rose-200";
+                feedbackEl.innerHTML = `<strong>Incorrect.</strong> ${q.explanation}`;
+                scoreTracker.delete(qId);
+            }
+            updateScore();
+        }
+
+        function checkID(qId) {
+            const q = idQuestions.find(item => item.id === qId);
+            const selectEl = document.getElementById(`id-select-${qId}`);
+            const feedbackEl = document.getElementById(`feedback-${qId}`);
+            const selectedVal = selectEl.value;
+
+            if (!selectedVal) return;
+
+            feedbackEl.classList.remove('hidden');
+            if (selectedVal === q.answer) {
+                feedbackEl.className = "text-xs sm:text-sm p-3 rounded-lg mt-2 bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedbackEl.innerHTML = `<strong>Correct!</strong> "${q.answer}" is the right term.`;
+                scoreTracker.add(qId);
+            } else {
+                feedbackEl.className = "text-xs sm:text-sm p-3 rounded-lg mt-2 bg-rose-100 text-rose-800 border border-rose-200";
+                feedbackEl.innerHTML = `<strong>Incorrect.</strong> The correct answer is <strong>${q.answer}</strong>.`;
+                scoreTracker.delete(qId);
+            }
+            updateScore();
+        }
+
+        function checkMatching(qId) {
+            const q = matchingQuestions.find(item => item.id === qId);
+            const selectEl = document.getElementById(`match-select-${qId}`);
+            const feedbackEl = document.getElementById(`feedback-${qId}`);
+            const selectedVal = selectEl.value;
+
+            if (!selectedVal) return;
+
+            const matchedChoice = matchingChoices.find(c => c.letter === q.answer);
+
+            feedbackEl.classList.remove('hidden');
+            if (selectedVal === q.answer) {
+                feedbackEl.className = "text-xs p-2.5 rounded-lg mt-2 bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedbackEl.innerHTML = `<strong>Correct!</strong> [${q.answer}] ${matchedChoice.text}`;
+                scoreTracker.add(qId);
+            } else {
+                feedbackEl.className = "text-xs p-2.5 rounded-lg mt-2 bg-rose-100 text-rose-800 border border-rose-200";
+                feedbackEl.innerHTML = `<strong>Incorrect.</strong> Correct match: <strong>[${q.answer}] ${matchedChoice.text}</strong>`;
+                scoreTracker.delete(qId);
+            }
+            updateScore();
+        }
+
+        function updateScore() {
+            document.getElementById('score-display').innerText = `${scoreTracker.size} / 60`;
+        }
+
+        function resetTest() {
+            scoreTracker.clear();
+            updateScore();
+            renderMC();
+            renderID();
+            renderMatching();
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize Test
+        window.onload = function() {
+            renderMC();
+            renderID();
+            renderMatching();
+        };
+    </script>
+</body>
+</html>
